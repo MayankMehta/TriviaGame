@@ -5,27 +5,16 @@ using System.Data.Entity;
 
 namespace TriviaGame.Models
 {
-    public class SampleData
+    public class SampleData : DropCreateDatabaseAlways<TriviaDbContext>
     {
-        IServiceProvider _serviceProvider;
-
-        /*public SampleData(IServiceProvider serviceProvider)
+        //public void Initialize(IServiceProvider serviceProvider)
+        protected override void Seed(TriviaDbContext context)
         {
-            _serviceProvider = serviceProvider;
-            Initialize(_serviceProvider);
-        }*/
+            //context = (TriviaDbContext)serviceProvider.GetService(typeof(TriviaDbContext));
+            //context.Database.Initialize(false);
 
-        public void Initialize(IServiceProvider _serviceProvider)
-        {
-            //IServiceProvider serviceProvider;
-            //TriviaDbContext context = _serviceProvider.GetService<TriviaDbContext>();
-
-            TriviaDbContext context = (TriviaDbContext)_serviceProvider.GetService(typeof(TriviaDbContext));
-            context.Database.Initialize(false);
-            //context.Database.Migrate();
-
-            if (!context.TriviaQuestions.Any())
-            {
+            //if (!context.TriviaQuestions.Any())
+            //{
                 var questions = new List<TriviaQuestion>();
 
                 questions.Add(new TriviaQuestion
@@ -560,7 +549,7 @@ namespace TriviaGame.Models
                 context.TriviaQuestions.AddRange(questions);
 
                 context.SaveChanges();
-            }
+            //}
         }
     }
 }

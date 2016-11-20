@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -11,7 +12,8 @@ namespace TriviaGame
     {
         protected void Application_Start()
         {
-            System.Data.Entity.Database.SetInitializer<TriviaDbContext>(new SampleData().Initialize());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<TriviaDbContext>());
+            Database.SetInitializer(new SampleData());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

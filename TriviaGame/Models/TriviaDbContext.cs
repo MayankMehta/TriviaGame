@@ -8,17 +8,15 @@ namespace TriviaGame.Models
 
         public TriviaDbContext()
         {
-            if (!_created)
+            /*if (!_created)
             {
                 _created = true;
                 //Database.EnsureCreated();
                 Database.CreateIfNotExists();
-            }
+            }*/
+            Database.SetInitializer(new SampleData());
+            //Database.SetInitializer<TriviaDbContext>(new CreateDatabaseIfNotExists<TriviaDbContext>());
         }
-
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-        }*/
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {
